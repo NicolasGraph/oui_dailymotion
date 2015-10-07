@@ -1,0 +1,107 @@
+h1. oui_dailymotion
+
+Easily embed Dailymotion videos in articles and customise the appearance of the player.
+
+h2. Table of contents
+
+# "Plugin requirements":#help-section01
+# "Installation":#help-section02
+# "Tags":#help-section03
+# "Examples":#help-section04
+# "Author":#help-section05
+# "License":#help-section06
+
+h2(#help-section01). Plugin requirements
+
+oui_dailymotion's minimum requirements:
+
+* Textpattern 4.5+
+
+
+h2(#help-section02). Installation
+
+To install go to the 'plugins' tab under 'admin' and paste the plugin code into the 'Install plugin' box, 'upload' and then 'install'. Please note that you will need to set-up a custom field to use for associating videos with articles, unless you choose to directly embed the new tag in the article text.
+
+
+h2(#help-section03). Tags
+
+h3. oui_dailymotion
+
+Embeds a Dailymotion video in the page using an iframe.
+
+bc. <txp:oui_dailymotion />
+
+h4. Video attributes
+
+* _video_ - Dailymotion url or video ID for the video you want to embed
+* _custom_ - Name of the custom field containing video IDs/urls associated with article
+* _sart_ - Start position (in seconds) of the video as an integer
+* _autoplay_ - '1' to autoplay the video, '0' to turn off autoplay (default)
+
+h4. Basic attributes
+
+* _label_ - Label for the video
+* _labeltag_ - Independent wraptag for label
+* _wraptag_ - HTML tag to be used as the wraptag, without brackets
+* _class_ - CSS class attribute for wraptag
+
+h3. Customising the Dailymotion player
+
+You can customise the appearance of the Dailymotion player using this plugin to define things like colours and size.
+
+* _width_ - Width of video
+* _height_ - Height of video
+* _ratio_ - Aspect ratio (defaults 4:3)
+* _chromless_ - '1' to hide controls, '0' to show them (default)
+* _highlight_ - Apply 'ffcc33' (default) or any hexadecimal color value to the the controls. Dark or light theme will be automatically adjusted.
+* _info_ - '0' to hide controls, '1' to show them (default)
+* _logo_ - '0' to hide controls, '1' to show them (default)
+* _quality_ - Use either "240", "380", "480", "720", "1080", "1440" or "2160" to adjust the video quality
+* _related_ - '0' to hide controls, '1' to show them (default)
+
+h2. oui_if_dailymotion
+
+In addition to oui_dailymotion this plugin also comes with oui_if_dailymotion, a conditional tag for checking if the video URL is a Dailymotion one.
+
+bc. <txp:oui_if_dailymotion video="[URL]"></txp:oui_if_dailymotion>
+
+h4. Attributes
+
+Use one or the other of the following:
+
+* _custom_ - Name of the custom field containing video IDs/urls associated with article
+* _video_ - A URL to check if it is a valid Dailymotion URL
+
+h2(#help-section04). Examples
+
+h3. Example 1: Use custom field to associate video with an article
+
+bc. <txp:oui_dailymotion custom="Dailymotion" />
+
+h3. Example 2: Set the size of the player
+
+bc. <txp:oui_dailymotion video="https://Dailymotion.com/86295452" width="500" ratio="16:9" />
+
+h3. Example 3: Using the conditional tag
+
+bc.. <txp:oui_if_dailymotion video="https://Dailymotion.com/86295452">
+	Yes
+<txp:else />
+	No
+</txp:oui_if_dailymotion>
+
+h2(#help-section05). Author
+
+Made Dailymotion compatible by Nicolas Morand form "Andy Carter":http://andy-carter.com's plugins "arc_youtube":http://andy-carter.com/txp/arc_youtube and "arc_vimeo":http://andy-carter.com/txp/arc_vimeo.
+
+h2(#help-section06). License
+
+The MIT License (MIT)
+
+Copyright (c) 2014 Andy Carter, (c) 2015 Nicolas Morand
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
