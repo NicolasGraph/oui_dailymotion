@@ -1,7 +1,7 @@
 <?php
 $plugin['name'] = 'oui_dailymotion';
 
-$plugin['version'] = '1.1.1';
+$plugin['version'] = '1.1.2';
 $plugin['author'] = 'Nicolas Morand, Andy Carter';
 $plugin['author_uri'] = '';
 $plugin['description'] = 'Embed Dailymotion videos with customised player';
@@ -50,7 +50,7 @@ h4. Video attributes
 
 * _video_ - Dailymotion url or video ID for the video you want to embed
 * _custom_ - Name of the custom field containing video IDs/urls associated with article
-* _sart_ - Start position (in seconds) of the video as an integer
+* _start_ - Start position (in seconds) of the video as an integer
 * _autoplay_ - '1' to autoplay the video, '0' to turn off autoplay (default)
 
 h4. Basic attributes
@@ -64,15 +64,25 @@ h3. Customising the Dailymotion player
 
 You can customise the appearance of the Dailymotion player using this plugin to define things like colours and size.
 
-* _width_ - Width of video
-* _height_ - Height of video
-* _ratio_ - Aspect ratio (defaults 4:3)
-* _chromless_ - '1' to hide controls, '0' to show them (default)
-* _highlight_ - Apply 'ffcc33' (default) or any hexadecimal color value to the the controls. Dark or light theme will be automatically adjusted.
-* _info_ - '0' to hide controls, '1' to show them (default)
-* _logo_ - '0' to hide controls, '1' to show them (default)
-* _quality_ - Use either "240", "380", "480", "720", "1080", "1440" or "2160" to adjust the video quality
-* _related_ - '0' to hide controls, '1' to show them (default)
+* _width_ - Width of the video player.
+* _height_ - Height of the video player.
+* _ratio_ - Aspect ratio (defaults 4:3).
+* _api_ - Enables the Player API, see API below.
+* _autoplay_ - Starts the playback of the video automatically after the player load (defaults to 0).
+* _chromeless_ - Determines if the player should display controls or not during video playback (defaults to 0).
+* _highlight_ - HTML color of the controls elements' highlights (defaults to ffcc33). Overall skin colors will automatically be adjusted (dark or clear) based on this color element.
+* _html_ - Forces the HTML5 mode.
+* _id_ - Id of the player unique to the page to be passed back with all API messages
+* _info_ - Shows videos information (title/author) on the start screen (defaults to 1).
+* _logo_ - Allows to hide or show the Dailymotion logo (defaults to 1).
+* _network_ - Hints the player about the host network type. Allowed values are dsl and cellular. The player may use this value to select the correct default stream quality.
+* _origin_ - The domain of the page hosting the Dailymotion player. When using api=postMessage, you might want to specify origin for extra security.
+* _quality_ - Specifies the suggested quality for the video to be used by default (if available) when the playback starts. Valid values are 240, 380, 480, 720, 1080, 1440, 2160.
+* _related_ - Shows related videos at the end of the video. Default value is 1.
+* _start_ - Specifies when the video should start, value is in seconds. Default value is 0.
+* _startscreen_ - Forces the startscreen to use _flash_ or _html_ mode. By default, the html mode is used when UA can render it or flash otherwise.
+* _syndication_ - Passes your syndication key to the player, the value to set is your key.
+* _wmode_ - Sets the wmode value for the Flash player. Valid values are _direct_ and _opaque_. If you ever need to display html elements above the player, you should use wmode=opaque. Default value is direct.
 
 h2. oui_if_dailymotion
 
@@ -138,14 +148,22 @@ function oui_dailymotion($atts, $thing)
         'width'       => '0',
         'height'      => '0',
         'ratio'       => '4:3',
+        'api'         => '',
         'autoplay'    => '0',
 		'chromeless'  => '0',
 		'highlight'   => 'ffcc33',
-		'info'        => null,
-		'logo'        => null,
-		'quality'     => null, // 240, 380, 480, 720, 1080, 1440 or 2160
+		'html'        => '',
+		'id'          => '',
+		'info'        => '1',
+		'logo'        => '1',
+		'network'     => '',
+		'origin'      => '',
+		'quality'     => '', // 240, 380, 480, 720, 1080, 1440 or 2160
         'related'     => '1',
-        'start'     => '0',
+        'start'       => '0',
+        'startscreen' => '',
+        'syndication' => '',
+        'wmode'       => 'direct',
         'label'       => '',
         'labeltag'    => '',
         'wraptag'     => '',
@@ -178,42 +196,82 @@ function oui_dailymotion($atts, $thing)
 
     $qString = array();
 
-    // Enable autoplay.
-    if ($autoplay) {
-        $qString[] = 'autoPlay=1';
+    // Enables the Player API.
+    if (in_array($api, array(postMessage, fragment, location))) {
+        $qString[] = 'api=' . $api;
     }
 
-     // Enable controls during video playback.
+    // Starts the playback of the video automatically after the player load.
+    if (in_array($autoplay, array(1, 0))) {
+        $qString[] = 'html=' . $autoplay;
+    }
+
+    // Determines if the player should display controls or not during video playback.
     if ($chromeless) {
         $qString[] = 'chromeless=1';
     }
- 
-    // Set the player UI's color.
+     
+    // HTML color of the controls elements' highlights.
     $qString[] = 'highlight='.$highlight.'';
 
-    // Show or hide the video information display by default.
-    if ($info!==null) {
-        $qString[] = 'info=' . ($info ? '1' : '0');
+    // Forces the HTML5 mode.
+    if (in_array($html, array(1, 0))) {
+        $qString[] = 'html=' . $html;
     }
 
-    // Show or hide the video logo display by default.
-    if ($logo!==null) {
-        $qString[] = 'logo=' . ($logo ? '1' : '0');
+    // Id of the player unique to the page to be passed back with all API messages.
+    if ($id) {
+        $qString[] = 'id=' . $id;
     }
 
-    // Change quality.
-    if ($quality!==null && in_array($quality, array(240, 380, 480, 720, 1080, 1440, 2160))) {
+    // Shows videos information (title/author) on the start screen.
+    if (in_array($info, array(1, 0))) {
+        $qString[] = 'info=' . $info;
+    }
+
+    // Shows videos information (title/author) on the start screen.
+    if (in_array($html, array(1, 0))) {
+        $qString[] = 'logo=' . $logo;
+    }
+
+    // Hints the player about the host network type.
+    if (in_array($network, array(dsl, cellular))) {
+        $qString[] = 'network=' . $network;
+    }
+
+    // The domain of the page hosting the Dailymotion player.
+    if ($origin) {
+        $qString[] = 'origin=' . $origin;
+    }
+
+    // Specifies the suggested quality for the video to be used by default.
+    if (in_array($quality, array(240, 380, 480, 720, 1080, 1440, 2160))) {
         $qString[] = 'quality=' . $quality;
     }
 
-    // Disable related videos.
-    if (!$related) {
-        $qString[] = 'related=0';
+    // Shows related videos at the end of the video.
+    if (in_array($related, array(1, 0))) {
+        $qString[] = 'related=' . $related;
     }
 
-    // Set the start position of the video.
+    // Specifies when the video should start, value is in seconds.
     if ($start) {
         $qString[] = 'start=' . $start;
+    }
+
+    // Forces the startscreen to use flash or html mode.
+    if (in_array($startscreen, array(flash, html))) {
+        $qString[] = 'startscreen=' . $startscreen;
+    }
+
+    // Passes your syndication key to the player, the value to set is your key.
+    if ($syndication) {
+        $qString[] = 'syndication=' . $syndication;
+    }
+
+    // Sets the wmode value for the Flash player.
+    if (in_array($wmode, array(direct, opaque))) {
+        $qString[] = 'wmode=' . $wmode;
     }
 
     // Check if we need to append a query string to the video src.
