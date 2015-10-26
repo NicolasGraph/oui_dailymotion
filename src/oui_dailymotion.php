@@ -1,7 +1,7 @@
 <?php
 $plugin['name'] = 'oui_dailymotion';
 
-$plugin['version'] = '1.1.2';
+$plugin['version'] = '1.2.0';
 $plugin['author'] = 'Nicolas Morand, Andy Carter';
 $plugin['author_uri'] = '';
 $plugin['description'] = 'Embed Dailymotion videos with customised player';
@@ -175,24 +175,15 @@ function oui_dailymotion($atts, $thing)
         $video = $thisarticle[$custom];
     }
 
-    $v = null;
-    $p = null;
-
     // Check for dailymotion video ID or dailymotion URL to extract ID from
     $match = _oui_dailymotion($video);
-    if (!empty($match['v'])) {
-        $v = $match['v'];
-    } elseif (!empty($match['p'])) {
-        $p = $match['p'];
-    } elseif (!empty($video)) {
-        $v = $video;
-    } else {
-        return '';
+    if ($match) {
+    	$video = $match;
+    } elseif (empty($video)) {
+    	return '';
     }
 
-    $src = '//www.dailymotion' . '.com/embed/video/';
-
-    $src .= !empty($v) ? $v : null;
+    $src = '//www.dailymotion.com/embed/video/' . $video;
 
     $qString = array();
 
@@ -330,29 +321,14 @@ function oui_if_dailymotion($atts, $thing)
 
 function _oui_dailymotion($video)
 {
-    if (preg_match("/^[a-zA-Z]+[:\/\/]+[A-Za-z0-9\-_]+\\.dailymotion\\.+[A-Za-z0-9\.\/%&=\?\-_]+$/i", $video)) {
+    if (preg_match('#^(http|https)?://www\.dailymotion\.com(/video)?/([A-Za-z0-9]+)#i', $video, $matches)) {
 
-        $urlc = parse_url($video);
-        $qstr = $urlc['query'];
-        parse_str($qstr, $qarr);
+        return $matches[3];
+    }
 
-        if (isset($qarr['v'])) {
+    elseif (preg_match('#^(http|https)?://dai\.ly(/video)?/([A-Za-z0-9]+)#i', $video, $matches)) {
 
-            return array('v' => $qarr['v']);
-
-        } elseif (isset($qarr['p'])) {
-
-            return array('p' => $qarr['p']);
-
-        } else {
-
-            return false;
-
-        }
-
-    }  elseif (preg_match("/^[a-zA-Z]+[:\/\/]+dai\.ly\/([A-Za-z0-9]+)/i", $video, $matches)) {
-
-        return array('v' => $matches[1]);
+        return $matches[3];
 
     }
 
