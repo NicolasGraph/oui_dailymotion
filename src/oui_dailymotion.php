@@ -153,7 +153,7 @@ function oui_dailymotion($atts, $thing)
 		'chromeless'  => '0',
 		'highlight'   => 'ffcc33',
 		'html'        => '',
-		'id'          => '',
+		'playerid'    => '',
 		'info'        => '1',
 		'logo'        => '1',
 		'network'     => '',
@@ -203,16 +203,16 @@ function oui_dailymotion($atts, $thing)
 
     // Starts the playback of the video automatically after the player load.
     if (in_array($autoplay, array(1, 0))) {
-        $qString[] = 'html=' . $autoplay;
+        $qString[] = 'autoplay=' . $autoplay;
     }
 
     // Determines if the player should display controls or not during video playback.
-    if ($chromeless) {
-        $qString[] = 'chromeless=1';
+    if (in_array($chromeless, array(1, 0))) {
+        $qString[] = 'chromeless=' . $chromeless;
     }
      
     // HTML color of the controls elements' highlights.
-    $qString[] = 'highlight='.$highlight.'';
+    $qString[] = 'highlight=' . $highlight;
 
     // Forces the HTML5 mode.
     if (in_array($html, array(1, 0))) {
@@ -220,8 +220,8 @@ function oui_dailymotion($atts, $thing)
     }
 
     // Id of the player unique to the page to be passed back with all API messages.
-    if ($id) {
-        $qString[] = 'id=' . $id;
+    if ($playerid) {
+        $qString[] = 'id=' . $playerid;
     }
 
     // Shows videos information (title/author) on the start screen.
@@ -229,8 +229,8 @@ function oui_dailymotion($atts, $thing)
         $qString[] = 'info=' . $info;
     }
 
-    // Shows videos information (title/author) on the start screen.
-    if (in_array($html, array(1, 0))) {
+    // Allows to hide or show the Dailymotion logo.
+    if (in_array($logo, array(1, 0))) {
         $qString[] = 'logo=' . $logo;
     }
 
