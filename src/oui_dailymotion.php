@@ -117,7 +117,7 @@ bc.. <txp:oui_if_dailymotion video="https://Dailymotion.com/86295452">
 
 h2(#help-section05). Author
 
-Made Dailymotion compatible by Nicolas Morand form "Andy Carter":http://andy-carter.com's plugins "arc_youtube":http://andy-carter.com/txp/arc_youtube and "arc_vimeo":http://andy-carter.com/txp/arc_vimeo.
+Made Dailymotion compatible by Nicolas Morand from "Andy Carter":http://andy-carter.com's plugins "arc_youtube":http://andy-carter.com/txp/arc_youtube and "arc_vimeo":http://andy-carter.com/txp/arc_vimeo.
 
 h2(#help-section06). License
 
@@ -201,7 +201,7 @@ function oui_dailymotion($atts, $thing)
     if (in_array($chromeless, array(1, 0))) {
         $qString[] = 'chromeless=' . $chromeless;
     }
-     
+
     // HTML color of the controls elements' highlights.
     $qString[] = 'highlight=' . $highlight;
 
