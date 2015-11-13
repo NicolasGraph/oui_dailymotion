@@ -10,7 +10,7 @@ $plugin['type'] = 0;
 @include_once('zem_tpl.php');
 
 if (0) {
-	?>
+    ?>
 # --- BEGIN PLUGIN HELP ---
 
 h1. oui_dailymotion
@@ -110,9 +110,9 @@ bc. <txp:oui_dailymotion video="https://Dailymotion.com/86295452" width="500" ra
 h3. Example 3: Using the conditional tag
 
 bc.. <txp:oui_if_dailymotion video="https://Dailymotion.com/86295452">
-	Yes
+    Yes
 <txp:else />
-	No
+    No
 </txp:oui_if_dailymotion>
 
 h2(#help-section05). Author
@@ -140,7 +140,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 function oui_dailymotion($atts, $thing)
 {
-	global $thisarticle;
+    global $thisarticle;
 
     extract(lAtts(array(
         'video'       => '',
@@ -150,15 +150,15 @@ function oui_dailymotion($atts, $thing)
         'ratio'       => '4:3',
         'api'         => '',
         'autoplay'    => '0',
-		'chromeless'  => '0',
-		'highlight'   => 'ffcc33',
-		'html'        => '',
-		'playerid'    => '',
-		'info'        => '1',
-		'logo'        => '1',
-		'network'     => '',
-		'origin'      => '',
-		'quality'     => '', // 240, 380, 480, 720, 1080, 1440 or 2160
+        'chromeless'  => '0',
+        'highlight'   => 'ffcc33',
+        'html'        => '',
+        'playerid'    => '',
+        'info'        => '1',
+        'logo'        => '1',
+        'network'     => '',
+        'origin'      => '',
+        'quality'     => '', // 240, 380, 480, 720, 1080, 1440 or 2160
         'related'     => '1',
         'start'       => '0',
         'startscreen' => '',
@@ -178,9 +178,9 @@ function oui_dailymotion($atts, $thing)
     // Check for dailymotion video ID or dailymotion URL to extract ID from
     $match = _oui_dailymotion($video);
     if ($match) {
-    	$video = $match;
+        $video = $match;
     } elseif (empty($video)) {
-    	return '';
+        return '';
     }
 
     $src = '//www.dailymotion.com/embed/video/' . $video;
