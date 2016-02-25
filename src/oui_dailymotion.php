@@ -1,7 +1,7 @@
 <?php
 $plugin['name'] = 'oui_dailymotion';
 
-$plugin['version'] = '1.2.0';
+$plugin['version'] = '1.3.0';
 $plugin['author'] = 'Nicolas Morand, Andy Carter';
 $plugin['author_uri'] = '';
 $plugin['description'] = 'Embed Dailymotion videos with customised player';
@@ -82,7 +82,7 @@ You can customise the appearance of the Dailymotion player using this plugin to 
 * _start_ - Specifies when the video should start, value is in seconds. Default value is 0.
 * _startscreen_ - Forces the startscreen to use _flash_ or _html_ mode. By default, the html mode is used when UA can render it or flash otherwise.
 * _syndication_ - Passes your syndication key to the player, the value to set is your key.
-* _wmode_ - Sets the wmode value for the Flash player. Valid values are _direct_ and _opaque_. If you ever need to display html elements above the player, you should use wmode=opaque. Default value is direct.
+* _wmode_ - Sets the wmode value for the Flash player. Valid values are _transparent_ and _opaque_. If you ever need to display html elements above the player, you should use wmode=opaque. Default value is transparent.
 
 h2. oui_if_dailymotion
 
@@ -163,7 +163,7 @@ function oui_dailymotion($atts, $thing)
         'start'       => '0',
         'startscreen' => '',
         'syndication' => '',
-        'wmode'       => 'direct',
+        'wmode'       => 'transparent',
         'label'       => '',
         'labeltag'    => '',
         'wraptag'     => '',
@@ -188,17 +188,22 @@ function oui_dailymotion($atts, $thing)
     $qString = array();
 
     // Enables the Player API.
-    if (in_array($api, array(postMessage, fragment, location))) {
-        $qString[] = 'api=' . $api;
-    }
+	if ($api) {
+	    if (in_array($api, array('postMessage', 'fragment', 'location'))) {
+	        $qString[] = 'api=' . $api;
+	    } else {
+	        trigger_error("unknown attribute value; oui_dailymotion api attribute accepts the following values: postMessage, fragment, location");
+	        return;
+	    }
+	}
 
     // Starts the playback of the video automatically after the player load.
-    if (in_array($autoplay, array(1, 0))) {
+    if (in_array($autoplay, array('1', '0'))) {
         $qString[] = 'autoplay=' . $autoplay;
     }
 
     // Determines if the player should display controls or not during video playback.
-    if (in_array($chromeless, array(1, 0))) {
+    if (in_array($chromeless, array('1', '0'))) {
         $qString[] = 'chromeless=' . $chromeless;
     }
 
@@ -206,29 +211,33 @@ function oui_dailymotion($atts, $thing)
     $qString[] = 'highlight=' . $highlight;
 
     // Forces the HTML5 mode.
-    if (in_array($html, array(1, 0))) {
+    if (in_array($html, array('1', '0'))) {
         $qString[] = 'html=' . $html;
     }
-
     // Id of the player unique to the page to be passed back with all API messages.
     if ($playerid) {
         $qString[] = 'id=' . $playerid;
     }
 
     // Shows videos information (title/author) on the start screen.
-    if (in_array($info, array(1, 0))) {
+    if (in_array($info, array('1', '0'))) {
         $qString[] = 'info=' . $info;
     }
 
     // Allows to hide or show the Dailymotion logo.
-    if (in_array($logo, array(1, 0))) {
+    if (in_array($logo, array('1', '0'))) {
         $qString[] = 'logo=' . $logo;
     }
 
     // Hints the player about the host network type.
-    if (in_array($network, array(dsl, cellular))) {
-        $qString[] = 'network=' . $network;
-    }
+	if ($network) {
+	    if (in_array($network, array('dsl', 'cellular'))) {
+	        $qString[] = 'network=' . $network;
+	    } else {
+	        trigger_error("unknown attribute value; oui_dailymotion network attribute accepts the following values: dsl, cellular");
+	        return;
+	    }
+	}
 
     // The domain of the page hosting the Dailymotion player.
     if ($origin) {
@@ -236,12 +245,18 @@ function oui_dailymotion($atts, $thing)
     }
 
     // Specifies the suggested quality for the video to be used by default.
-    if (in_array($quality, array(240, 380, 480, 720, 1080, 1440, 2160))) {
-        $qString[] = 'quality=' . $quality;
-    }
+	if ($quality) {
+	    if (in_array($quality, array('240', '380', '480', '720', '1080', '1440', '2160'))) {
+	        $qString[] = 'quality=' . $quality;
+	    } else {
+	        trigger_error("unknown attribute value; oui_dailymotion quality attribute accepts the following values: 240, 380, 480, 720, 1080, 1440, 2160");
+	        return;
+	    }
+	}
+    
 
     // Shows related videos at the end of the video.
-    if (in_array($related, array(1, 0))) {
+    if (in_array($related, array('1', '0'))) {
         $qString[] = 'related=' . $related;
     }
 
@@ -251,9 +266,14 @@ function oui_dailymotion($atts, $thing)
     }
 
     // Forces the startscreen to use flash or html mode.
-    if (in_array($startscreen, array(flash, html))) {
-        $qString[] = 'startscreen=' . $startscreen;
-    }
+	if ($startscreen) {
+	    if (in_array($startscreen, array('flash', 'html'))) {
+	        $qString[] = 'startscreen=' . $startscreen;
+	    } else {
+	        trigger_error("unknown attribute value; oui_dailymotion startscreen attribute accepts the following values: flash, html");
+	        return;
+	    }
+	}
 
     // Passes your syndication key to the player, the value to set is your key.
     if ($syndication) {
@@ -261,8 +281,11 @@ function oui_dailymotion($atts, $thing)
     }
 
     // Sets the wmode value for the Flash player.
-    if (in_array($wmode, array(direct, opaque))) {
+    if (in_array($wmode, array('transparent', 'opaque'))) {
         $qString[] = 'wmode=' . $wmode;
+    } else {
+        trigger_error("unknown attribute value; oui_dailymotion wmode attribute accepts the following values: transparent, opaque");
+        return;
     }
 
     // Check if we need to append a query string to the video src.
