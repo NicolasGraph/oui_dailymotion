@@ -1,7 +1,7 @@
 <?php
 $plugin['name'] = 'oui_dailymotion';
 
-$plugin['version'] = '1.3.0';
+$plugin['version'] = '1.3.1';
 $plugin['author'] = 'Nicolas Morand, Andy Carter';
 $plugin['author_uri'] = '';
 $plugin['description'] = 'Embed Dailymotion videos with customised player';
@@ -137,6 +137,13 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 }
 
 # --- BEGIN PLUGIN CODE ---
+if (class_exists('\Textpattern\Tag\Registry')) {
+    // Register Textpattern tags for TXP 4.6+.
+    Txp::get('\Textpattern\Tag\Registry')
+        ->register('oui_dailymotion')
+        ->register('oui_if_dailymotion');
+}
+
 
 function oui_dailymotion($atts, $thing)
 {
