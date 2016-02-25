@@ -69,7 +69,7 @@ You can customise the appearance of the Dailymotion player using this plugin to 
 * _start_ - Specifies when the video should start, value is in seconds. Default value is 0.
 * _startscreen_ - Forces the startscreen to use _flash_ or _html_ mode. By default, the html mode is used when UA can render it or flash otherwise.
 * _syndication_ - Passes your syndication key to the player, the value to set is your key.
-* _wmode_ - Sets the wmode value for the Flash player. Valid values are _direct_ and _opaque_. If you ever need to display html elements above the player, you should use wmode=opaque. Default value is direct.
+* _wmode_ - Sets the wmode value for the Flash player. Valid values are _transparent_ and _opaque_. If you ever need to display html elements above the player, you should use wmode=opaque. Default value is transparent.
 
 h2. oui_if_dailymotion
 
