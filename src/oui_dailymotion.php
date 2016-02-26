@@ -2,8 +2,8 @@
 $plugin['name'] = 'oui_dailymotion';
 
 $plugin['version'] = '1.3.1';
-$plugin['author'] = 'Nicolas Morand, Andy Carter';
-$plugin['author_uri'] = '';
+$plugin['author'] = 'Nicolas Morand';
+$plugin['author_uri'] = 'https://github.com/NicolasGraph';
 $plugin['description'] = 'Embed Dailymotion videos with customised player';
 $plugin['type'] = 0;
 
@@ -195,14 +195,14 @@ function oui_dailymotion($atts, $thing)
     $qString = array();
 
     // Enables the Player API.
-	if ($api) {
-	    if (in_array($api, array('postMessage', 'fragment', 'location'))) {
-	        $qString[] = 'api=' . $api;
-	    } else {
-	        trigger_error("unknown attribute value; oui_dailymotion api attribute accepts the following values: postMessage, fragment, location");
-	        return;
-	    }
-	}
+    if ($api) {
+        if (in_array($api, array('postMessage', 'fragment', 'location'))) {
+            $qString[] = 'api=' . $api;
+        } else {
+            trigger_error("unknown attribute value; oui_dailymotion api attribute accepts the following values: postMessage, fragment, location");
+            return;
+        }
+    }
 
     // Starts the playback of the video automatically after the player load.
     if (in_array($autoplay, array('1', '0'))) {
@@ -237,14 +237,14 @@ function oui_dailymotion($atts, $thing)
     }
 
     // Hints the player about the host network type.
-	if ($network) {
-	    if (in_array($network, array('dsl', 'cellular'))) {
-	        $qString[] = 'network=' . $network;
-	    } else {
-	        trigger_error("unknown attribute value; oui_dailymotion network attribute accepts the following values: dsl, cellular");
-	        return;
-	    }
-	}
+    if ($network) {
+        if (in_array($network, array('dsl', 'cellular'))) {
+            $qString[] = 'network=' . $network;
+        } else {
+            trigger_error("unknown attribute value; oui_dailymotion network attribute accepts the following values: dsl, cellular");
+            return;
+        }
+    }
 
     // The domain of the page hosting the Dailymotion player.
     if ($origin) {
@@ -252,14 +252,14 @@ function oui_dailymotion($atts, $thing)
     }
 
     // Specifies the suggested quality for the video to be used by default.
-	if ($quality) {
-	    if (in_array($quality, array('240', '380', '480', '720', '1080', '1440', '2160'))) {
-	        $qString[] = 'quality=' . $quality;
-	    } else {
-	        trigger_error("unknown attribute value; oui_dailymotion quality attribute accepts the following values: 240, 380, 480, 720, 1080, 1440, 2160");
-	        return;
-	    }
-	}
+    if ($quality) {
+        if (in_array($quality, array('240', '380', '480', '720', '1080', '1440', '2160'))) {
+            $qString[] = 'quality=' . $quality;
+        } else {
+            trigger_error("unknown attribute value; oui_dailymotion quality attribute accepts the following values: 240, 380, 480, 720, 1080, 1440, 2160");
+            return;
+        }
+    }
     
 
     // Shows related videos at the end of the video.
@@ -273,14 +273,14 @@ function oui_dailymotion($atts, $thing)
     }
 
     // Forces the startscreen to use flash or html mode.
-	if ($startscreen) {
-	    if (in_array($startscreen, array('flash', 'html'))) {
-	        $qString[] = 'startscreen=' . $startscreen;
-	    } else {
-	        trigger_error("unknown attribute value; oui_dailymotion startscreen attribute accepts the following values: flash, html");
-	        return;
-	    }
-	}
+    if ($startscreen) {
+        if (in_array($startscreen, array('flash', 'html'))) {
+            $qString[] = 'startscreen=' . $startscreen;
+        } else {
+            trigger_error("unknown attribute value; oui_dailymotion startscreen attribute accepts the following values: flash, html");
+            return;
+        }
+    }
 
     // Passes your syndication key to the player, the value to set is your key.
     if ($syndication) {
