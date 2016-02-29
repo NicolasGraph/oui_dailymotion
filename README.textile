@@ -2,7 +2,7 @@ h1. oui_dailymotion
 
 Easily embed Dailymotion videos in articles and customise the appearance of the player.
 
-!https://www.paypalobjects.com/en_GB/i/btn/btn_donate_SM.gif!:https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PREHX3MZMXEUN
+"Download":https://github.com/NicolasGraph/oui_dailymotion/releases | "Donate":https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PREHX3MZMXEUN
 
 h2. Table of contents
 
