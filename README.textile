@@ -1,4 +1,4 @@
-h1. oui_dailymotion
+h1. oui_dailymotion <img src="https://img.shields.io/badge/Textpattern-4.5+-brightgreen.svg" />
 
 Easily embed Dailymotion videos in articles and customise the appearance of the player.
 
