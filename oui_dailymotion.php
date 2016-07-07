@@ -1,140 +1,4 @@
 <?php
-$plugin['name'] = 'oui_dailymotion';
-
-$plugin['version'] = '1.3.1';
-$plugin['author'] = 'Nicolas Morand';
-$plugin['author_uri'] = 'https://github.com/NicolasGraph';
-$plugin['description'] = 'Embed Dailymotion videos with customised player';
-$plugin['type'] = 0;
-
-@include_once('zem_tpl.php');
-
-if (0) {
-    ?>
-# --- BEGIN PLUGIN HELP ---
-
-h1. oui_dailymotion
-
-Easily embed Dailymotion videos in articles and customise the appearance of the player.
-
-h2. Table of contents
-
-# "Plugin requirements":#help-section01
-# "Installation":#help-section02
-# "Tags":#help-section03
-# "Examples":#help-section04
-# "Author":#help-section05
-# "License":#help-section06
-
-h2(#help-section01). Plugin requirements
-
-oui_dailymotion's minimum requirements:
-
-* Textpattern 4.5+
-
-
-h2(#help-section02). Installation
-
-To install go to the 'plugins' tab under 'admin' and paste the plugin code into the 'Install plugin' box, 'upload' and then 'install'. Please note that you will need to set-up a custom field to use for associating videos with articles, unless you choose to directly embed the new tag in the article text.
-
-
-h2(#help-section03). Tags
-
-h3. oui_dailymotion
-
-Embeds a Dailymotion video in the page using an iframe.
-
-bc. <txp:oui_dailymotion />
-
-h4. Video attributes
-
-* _video_ - Dailymotion url or video ID for the video you want to embed
-* _custom_ - Name of the custom field containing video IDs/urls associated with article
-* _start_ - Start position (in seconds) of the video as an integer
-* _autoplay_ - '1' to autoplay the video, '0' to turn off autoplay (default)
-
-h4. Basic attributes
-
-* _label_ - Label for the video
-* _labeltag_ - Independent wraptag for label
-* _wraptag_ - HTML tag to be used as the wraptag, without brackets
-* _class_ - CSS class attribute for wraptag
-
-h3. Customising the Dailymotion player
-
-You can customise the appearance of the Dailymotion player using this plugin to define things like colours and size.
-
-* _width_ - Width of the video player.
-* _height_ - Height of the video player.
-* _ratio_ - Aspect ratio (defaults 4:3).
-* _api_ - Enables the Player API, see API below.
-* _autoplay_ - Starts the playback of the video automatically after the player load (defaults to 0).
-* _chromeless_ - Determines if the player should display controls or not during video playback (defaults to 0).
-* _highlight_ - HTML color of the controls elements' highlights (defaults to ffcc33). Overall skin colors will automatically be adjusted (dark or clear) based on this color element.
-* _html_ - Forces the HTML5 mode.
-* _id_ - Id of the player unique to the page to be passed back with all API messages
-* _info_ - Shows videos information (title/author) on the start screen (defaults to 1).
-* _logo_ - Allows to hide or show the Dailymotion logo (defaults to 1).
-* _network_ - Hints the player about the host network type. Allowed values are dsl and cellular. The player may use this value to select the correct default stream quality.
-* _origin_ - The domain of the page hosting the Dailymotion player. When using api=postMessage, you might want to specify origin for extra security.
-* _quality_ - Specifies the suggested quality for the video to be used by default (if available) when the playback starts. Valid values are 240, 380, 480, 720, 1080, 1440, 2160.
-* _related_ - Shows related videos at the end of the video. Default value is 1.
-* _start_ - Specifies when the video should start, value is in seconds. Default value is 0.
-* _startscreen_ - Forces the startscreen to use _flash_ or _html_ mode. By default, the html mode is used when UA can render it or flash otherwise.
-* _syndication_ - Passes your syndication key to the player, the value to set is your key.
-* _wmode_ - Sets the wmode value for the Flash player. Valid values are _transparent_ and _opaque_. If you ever need to display html elements above the player, you should use wmode=opaque. Default value is transparent.
-
-h2. oui_if_dailymotion
-
-In addition to oui_dailymotion this plugin also comes with oui_if_dailymotion, a conditional tag for checking if the video URL is a Dailymotion one.
-
-bc. <txp:oui_if_dailymotion video="[URL]"></txp:oui_if_dailymotion>
-
-h4. Attributes
-
-Use one or the other of the following:
-
-* _custom_ - Name of the custom field containing video IDs/urls associated with article
-* _video_ - A URL to check if it is a valid Dailymotion URL
-
-h2(#help-section04). Examples
-
-h3. Example 1: Use custom field to associate video with an article
-
-bc. <txp:oui_dailymotion custom="Dailymotion" />
-
-h3. Example 2: Set the size of the player
-
-bc. <txp:oui_dailymotion video="https://Dailymotion.com/86295452" width="500" ratio="16:9" />
-
-h3. Example 3: Using the conditional tag
-
-bc.. <txp:oui_if_dailymotion video="https://Dailymotion.com/86295452">
-    Yes
-<txp:else />
-    No
-</txp:oui_if_dailymotion>
-
-h2(#help-section05). Author
-
-Made Dailymotion compatible by Nicolas Morand from "Andy Carter":http://andy-carter.com's plugins "arc_youtube":http://andy-carter.com/txp/arc_youtube and "arc_vimeo":http://andy-carter.com/txp/arc_vimeo.
-
-h2(#help-section06). License
-
-The MIT License (MIT)
-
-Copyright (c) 2014 Andy Carter, (c) 2015 Nicolas Morand
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-
-# --- END PLUGIN HELP ---
-<?php
-}
 
 # --- BEGIN PLUGIN CODE ---
 if (class_exists('\Textpattern\Tag\Registry')) {
@@ -260,7 +124,7 @@ function oui_dailymotion($atts, $thing)
             return;
         }
     }
-    
+
 
     // Shows related videos at the end of the video.
     if (in_array($related, array('1', '0'))) {
@@ -364,8 +228,3 @@ function _oui_dailymotion($video)
 
     return false;
 }
-
-
-# --- END PLUGIN CODE ---
-
-?>

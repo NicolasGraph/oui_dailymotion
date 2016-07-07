@@ -19,7 +19,6 @@ oui_dailymotion's minimum requirements:
 
 * Textpattern 4.5+
 
-
 h2(#help-section02). Installation
 
 To install go to the 'plugins' tab under 'admin' and paste the plugin code into the 'Install plugin' box, 'upload' and then 'install'. Please note that you will need to set-up a custom field to use for associating videos with articles, unless you choose to directly embed the new tag in the article text.
