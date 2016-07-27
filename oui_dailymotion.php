@@ -39,7 +39,7 @@ function oui_dailymotion($atts, $thing)
         'labeltag'    => '',
         'wraptag'     => '',
         'class'       => __FUNCTION__
-    ),$atts));
+    ), $atts));
 
     $custom = strtolower($custom);
     if (!$video && isset($thisarticle[$custom])) {
@@ -167,7 +167,6 @@ function oui_dailymotion($atts, $thing)
     // If the width and/or height has not been set we want to calculate new
     // ones using the aspect ratio.
     if (!$width || !$height) {
-
         $toolbarHeight = 25;
 
         // Work out the aspect ratio.
@@ -187,14 +186,12 @@ function oui_dailymotion($atts, $thing)
             $width = 425;
             $height = 344;
         }
-
     }
 
     $out = '<iframe width="'.$width.'" height="'.$height
       .'" src="'.$src.'" frameborder="0" allowfullscreen></iframe>';
 
     return doLabel($label, $labeltag).(($wraptag) ? doTag($out, $wraptag, $class) : $out);
-
 }
 
 
@@ -216,14 +213,9 @@ function oui_if_dailymotion($atts, $thing)
 function _oui_dailymotion($video)
 {
     if (preg_match('#^(http|https)?://www\.dailymotion\.com(/video)?/([A-Za-z0-9]+)#i', $video, $matches)) {
-
         return $matches[3];
-    }
-
-    elseif (preg_match('#^(http|https)?://dai\.ly(/video)?/([A-Za-z0-9]+)#i', $video, $matches)) {
-
+    } elseif (preg_match('#^(http|https)?://dai\.ly(/video)?/([A-Za-z0-9]+)#i', $video, $matches)) {
         return $matches[3];
-
     }
 
     return false;
