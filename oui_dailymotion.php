@@ -23,13 +23,13 @@ function oui_dailymotion($atts, $thing)
         'autoplay'    => '0',
         'chromeless'  => '0',
         'highlight'   => 'ffcc33',
-        'html'        => '',
+        'html'        => '0',
         'playerid'    => '',
         'info'        => '1',
         'logo'        => '1',
         'network'     => '',
         'origin'      => '',
-        'quality'     => '', // 240, 380, 480, 720, 1080, 1440 or 2160
+        'quality'     => '',
         'related'     => '1',
         'start'       => '0',
         'startscreen' => '',
@@ -46,7 +46,9 @@ function oui_dailymotion($atts, $thing)
         $video = $thisarticle[$custom];
     }
 
-    // Check for dailymotion video ID or dailymotion URL to extract ID from
+    /*
+     * Check for dailymotion video ID or dailymotion URL to extract ID from
+     */
     $match = _oui_dailymotion($video);
     if ($match) {
         $video = $match;
@@ -58,134 +60,84 @@ function oui_dailymotion($atts, $thing)
 
     $qString = array();
 
-    // Enables the Player API.
-    if ($api) {
-        if (in_array($api, array('postMessage', 'fragment', 'location'))) {
-            $qString[] = 'api=' . $api;
+    /*
+     * Optional attributes.
+     */
+    $ifAtts = array(
+        'highlight'   => $highlight, // HTML color of the controls elements' highlights.
+        'id'          => $playerid, // Id of the player unique to the page to be passed back with all API messages.
+        'origin'      => $origin, // The domain of the page hosting the Dailymotion player.
+        'start'       => $start, // Specifies when the video should start, value is in seconds.
+        'syndication' => $syndication // Passes your syndication key to the player, the value to set is your key.
+    );
+
+    foreach ($ifAtts as $att => $value) {
+        $value ? $qString[] = $att.'='.$value : '';
+    };
+
+    /*
+     * Attributes with boolean values.
+     */
+    $boolAtts = array(
+        'autoplay'   => $autoplay, // Starts the playback of the video automatically after the player load.
+        'chromeless' => $chromeless, // Determines if the player should display controls or not during video playback.
+        'html'       => $html, // Forces the HTML5 mode.
+        'info'       => $info, // Allows to hide or show the Dailymotion logo.
+        'logo'       => $logo, // Allows to hide or show the Dailymotion logo.
+        'related'    => $related // Shows related videos at the end of the video.
+    );
+
+    foreach ($boolAtts as $att => $value) {
+        if (in_array($value, array('1', '0'))) {
+            $qString[] = $att.'='.$value;
         } else {
             trigger_error(
                 "unknown attribute value;
-                oui_dailymotion api attribute accepts the following values:
-                postMessage, fragment, location"
+                oui_dailymotion " . $att . " attribute accepts the following values:
+                1 or 0"
             );
-            return;
         }
-    }
+    };
 
-    // Starts the playback of the video automatically after the player load.
-    if (in_array($autoplay, array('1', '0'))) {
-        $qString[] = 'autoplay=' . $autoplay;
-    }
+    /*
+     * Attributes with restricted values.
+     */
+    $validAtts = array(
+        'api'         => array($api => 'postMessage, fragment, location'), // Enables the Player API.
+        'network'     => array($network => 'dsl, cellular'), // Hints the player about the host network type.
+        'quality'     => array($quality => '240, 380, 480, 720, 1080, 1440, 2160'), // Suggested quality.
+        'startscreen' => array($startscreen => 'flash, html'), // Forces the startscreen to use flash or html mode.)
+        'wmode'       => array($wmode => 'transparent, opaque') // Sets the wmode value for the Flash player.
+    );
 
-    // Determines if the player should display controls or not during video playback.
-    if (in_array($chromeless, array('1', '0'))) {
-        $qString[] = 'chromeless=' . $chromeless;
-    }
+    foreach ($validAtts as $att => $values) {
+        foreach ($values as $value => $valid) {
+            if ($value) {
+                if (in_list($value, $valid)) {
+                    $qString[] = $att.'='.$value;
+                } else {
+                    trigger_error(
+                        "unknown attribute value;
+                        oui_dailymotion " . $att . " attribute accepts the following values: "
+                        . $valid
+                    );
+                    return;
+                }
+            }
+        };
+    };
 
-    // HTML color of the controls elements' highlights.
-    $qString[] = 'highlight=' . $highlight;
-
-    // Forces the HTML5 mode.
-    if (in_array($html, array('1', '0'))) {
-        $qString[] = 'html=' . $html;
-    }
-    // Id of the player unique to the page to be passed back with all API messages.
-    if ($playerid) {
-        $qString[] = 'id=' . $playerid;
-    }
-
-    // Shows videos information (title/author) on the start screen.
-    if (in_array($info, array('1', '0'))) {
-        $qString[] = 'info=' . $info;
-    }
-
-    // Allows to hide or show the Dailymotion logo.
-    if (in_array($logo, array('1', '0'))) {
-        $qString[] = 'logo=' . $logo;
-    }
-
-    // Hints the player about the host network type.
-    if ($network) {
-        if (in_array($network, array('dsl', 'cellular'))) {
-            $qString[] = 'network=' . $network;
-        } else {
-            trigger_error(
-                "unknown attribute value;
-                oui_dailymotion network attribute accepts the following values:
-                dsl, cellular"
-            );
-            return;
-        }
-    }
-
-    // The domain of the page hosting the Dailymotion player.
-    if ($origin) {
-        $qString[] = 'origin=' . $origin;
-    }
-
-    // Specifies the suggested quality for the video to be used by default.
-    if ($quality) {
-        if (in_array($quality, array('240', '380', '480', '720', '1080', '1440', '2160'))) {
-            $qString[] = 'quality=' . $quality;
-        } else {
-            trigger_error(
-                "unknown attribute value;
-                oui_dailymotion quality attribute accepts the following values:
-                240, 380, 480, 720, 1080, 1440, 2160"
-            );
-            return;
-        }
-    }
-
-
-    // Shows related videos at the end of the video.
-    if (in_array($related, array('1', '0'))) {
-        $qString[] = 'related=' . $related;
-    }
-
-    // Specifies when the video should start, value is in seconds.
-    if ($start) {
-        $qString[] = 'start=' . $start;
-    }
-
-    // Forces the startscreen to use flash or html mode.
-    if ($startscreen) {
-        if (in_array($startscreen, array('flash', 'html'))) {
-            $qString[] = 'startscreen=' . $startscreen;
-        } else {
-            trigger_error(
-                "unknown attribute value;
-                oui_dailymotion startscreen attribute accepts the following values:
-                flash, html"
-            );
-            return;
-        }
-    }
-
-    // Passes your syndication key to the player, the value to set is your key.
-    if ($syndication) {
-        $qString[] = 'syndication=' . $syndication;
-    }
-
-    // Sets the wmode value for the Flash player.
-    if (in_array($wmode, array('transparent', 'opaque'))) {
-        $qString[] = 'wmode=' . $wmode;
-    } else {
-        trigger_error(
-            "unknown attribute value;
-            oui_dailymotion wmode attribute accepts the following values:
-            transparent, opaque"
-        );
-        return;
-    }
-
-    // Check if we need to append a query string to the video src.
+    /*
+     * Check if we need to append a query string to the video src.
+     */
     if (!empty($qString)) {
         $src .= '?' . implode('&amp;', $qString);
     }
 
-    // If the width and/or height has not been set we want to calculate new
-    // ones using the aspect ratio.
+    /*
+     * If the width and/or height has not been set we want to calculate new
+     * ones using the aspect ratio.
+     */
     if (!$width || !$height) {
         $toolbarHeight = 25;
 
