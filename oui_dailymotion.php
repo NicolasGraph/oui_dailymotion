@@ -72,7 +72,7 @@ function oui_dailymotion($atts, $thing)
     );
 
     foreach ($ifAtts as $att => $value) {
-        $value ? $qString[] = $att.'='.$value : '';
+        $value ? $qString[] = $att . '=' . $value : '';
     };
 
     /*
@@ -88,8 +88,8 @@ function oui_dailymotion($atts, $thing)
     );
 
     foreach ($boolAtts as $att => $value) {
-        if (in_array($value, array('1', '0'))) {
-            $qString[] = $att.'='.$value;
+        if (in_list($value, '1, 0')) {
+            $qString[] = $att . '=' . $value;
         } else {
             trigger_error(
                 "unknown attribute value;
@@ -114,7 +114,7 @@ function oui_dailymotion($atts, $thing)
         foreach ($values as $value => $valid) {
             if ($value) {
                 if (in_list($value, $valid)) {
-                    $qString[] = $att.'='.$value;
+                    $qString[] = $att . '=' . $value;
                 } else {
                     trigger_error(
                         "unknown attribute value;
