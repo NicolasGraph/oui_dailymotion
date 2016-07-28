@@ -19,22 +19,22 @@ function oui_dailymotion($atts, $thing)
         'width'       => '0',
         'height'      => '0',
         'ratio'       => '4:3',
-        'api'         => '',
-        'autoplay'    => '0',
-        'chromeless'  => '0',
-        'highlight'   => 'ffcc33',
-        'html'        => '0',
-        'playerid'    => '',
-        'info'        => '1',
-        'logo'        => '1',
-        'network'     => '',
-        'origin'      => '',
-        'quality'     => '',
-        'related'     => '1',
-        'start'       => '0',
-        'startscreen' => '',
-        'syndication' => '',
-        'wmode'       => 'transparent',
+        'api'         => '', // Enables the Player API.
+        'autoplay'    => '0', // Starts the playback of the video automatically after the player load.
+        'chromeless'  => '0', // If the player should display controls or not during video playback.
+        'highlight'   => 'ffcc33', // HTML color of the controls elements' highlights.
+        'html'        => '0', // Forces the HTML5 mode.
+        'playerid'    => '',  // Id of the player unique to the page to be passed back with all API messages.
+        'info'        => '1', // Allows to hide or show the Dailymotion logo.
+        'logo'        => '1', // Allows to hide or show the Dailymotion logo.
+        'network'     => '', // Hints the player about the host network type.
+        'origin'      => '', // The domain of the page hosting the Dailymotion player.
+        'quality'     => '', // Suggested quality.
+        'related'     => '1', // Shows related videos at the end of the video.
+        'start'       => '0', // Specifies when the video should start, value is in seconds.
+        'startscreen' => '', // Forces the startscreen to use flash or html mode.)
+        'syndication' => '', // Passes your syndication key to the player, the value to set is your key.
+        'wmode'       => 'transparent', // Sets the wmode value for the Flash player.
         'label'       => '',
         'labeltag'    => '',
         'wraptag'     => '',
@@ -58,73 +58,51 @@ function oui_dailymotion($atts, $thing)
 
     $src = '//www.dailymotion.com/embed/video/' . $video;
 
+    /*
+     * Attributes.
+     */
+    $qAtts = array(
+        'highlight'   => $highlight,
+        'id'          => $playerid,
+        'origin'      => $origin,
+        'start'       => $start,
+        'syndication' => $syndication,
+        'autoplay'    => array($autoplay => '0, 1'),
+        'chromeless'  => array($chromeless => '0, 1'),
+        'html'        => array($html => '0, 1'),
+        'info'        => array($info => '0, 1'),
+        'logo'        => array($logo => '0, 1'),
+        'related'     => array($related => '0, 1'),
+        'api'         => array($api => 'postMessage, fragment, location'),
+        'network'     => array($network => 'dsl, cellular'),
+        'quality'     => array($quality => '240, 380, 480, 720, 1080, 1440, 2160'),
+        'startscreen' => array($startscreen => 'flash, html'),
+        'wmode'       => array($wmode => 'transparent, opaque')
+    );
+
     $qString = array();
 
-    /*
-     * Optional attributes.
-     */
-    $ifAtts = array(
-        'highlight'   => $highlight, // HTML color of the controls elements' highlights.
-        'id'          => $playerid, // Id of the player unique to the page to be passed back with all API messages.
-        'origin'      => $origin, // The domain of the page hosting the Dailymotion player.
-        'start'       => $start, // Specifies when the video should start, value is in seconds.
-        'syndication' => $syndication // Passes your syndication key to the player, the value to set is your key.
-    );
-
-    foreach ($ifAtts as $att => $value) {
-        $value ? $qString[] = $att . '=' . $value : '';
-    };
-
-    /*
-     * Attributes with boolean values.
-     */
-    $boolAtts = array(
-        'autoplay'   => $autoplay, // Starts the playback of the video automatically after the player load.
-        'chromeless' => $chromeless, // Determines if the player should display controls or not during video playback.
-        'html'       => $html, // Forces the HTML5 mode.
-        'info'       => $info, // Allows to hide or show the Dailymotion logo.
-        'logo'       => $logo, // Allows to hide or show the Dailymotion logo.
-        'related'    => $related // Shows related videos at the end of the video.
-    );
-
-    foreach ($boolAtts as $att => $value) {
-        if (in_list($value, '1, 0')) {
-            $qString[] = $att . '=' . $value;
-        } else {
-            trigger_error(
-                "unknown attribute value;
-                oui_dailymotion " . $att . " attribute accepts the following values:
-                1 or 0"
-            );
-        }
-    };
-
-    /*
-     * Attributes with restricted values.
-     */
-    $validAtts = array(
-        'api'         => array($api => 'postMessage, fragment, location'), // Enables the Player API.
-        'network'     => array($network => 'dsl, cellular'), // Hints the player about the host network type.
-        'quality'     => array($quality => '240, 380, 480, 720, 1080, 1440, 2160'), // Suggested quality.
-        'startscreen' => array($startscreen => 'flash, html'), // Forces the startscreen to use flash or html mode.)
-        'wmode'       => array($wmode => 'transparent, opaque') // Sets the wmode value for the Flash player.
-    );
-
-    foreach ($validAtts as $att => $values) {
-        foreach ($values as $value => $valid) {
-            if ($value) {
-                if (in_list($value, $valid)) {
-                    $qString[] = $att . '=' . $value;
-                } else {
-                    trigger_error(
-                        "unknown attribute value;
-                        oui_dailymotion " . $att . " attribute accepts the following values: "
-                        . $valid
-                    );
-                    return;
+    foreach ($qAtts as $att => $values) {
+        if ($values) {
+            if (!is_array($values)) {
+                $qString[] = $att . '=' . $values;
+            } else {
+                foreach ($values as $value => $valid) {
+                    if ($value) {
+                        if (in_list($value, $valid)) {
+                            $qString[] = $att . '=' . $value;
+                        } else {
+                            trigger_error(
+                                "unknown attribute value;
+                                oui_dailymotion " . $att . " attribute accepts the following values: "
+                                . $valid
+                            );
+                            return;
+                        }
+                    }
                 }
             }
-        };
+        }
     };
 
     /*
