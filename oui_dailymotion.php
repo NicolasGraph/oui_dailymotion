@@ -63,7 +63,11 @@ function oui_dailymotion($atts, $thing)
         if (in_array($api, array('postMessage', 'fragment', 'location'))) {
             $qString[] = 'api=' . $api;
         } else {
-            trigger_error("unknown attribute value; oui_dailymotion api attribute accepts the following values: postMessage, fragment, location");
+            trigger_error(
+                "unknown attribute value;
+                oui_dailymotion api attribute accepts the following values:
+                postMessage, fragment, location"
+            );
             return;
         }
     }
@@ -105,7 +109,11 @@ function oui_dailymotion($atts, $thing)
         if (in_array($network, array('dsl', 'cellular'))) {
             $qString[] = 'network=' . $network;
         } else {
-            trigger_error("unknown attribute value; oui_dailymotion network attribute accepts the following values: dsl, cellular");
+            trigger_error(
+                "unknown attribute value;
+                oui_dailymotion network attribute accepts the following values:
+                dsl, cellular"
+            );
             return;
         }
     }
@@ -120,7 +128,11 @@ function oui_dailymotion($atts, $thing)
         if (in_array($quality, array('240', '380', '480', '720', '1080', '1440', '2160'))) {
             $qString[] = 'quality=' . $quality;
         } else {
-            trigger_error("unknown attribute value; oui_dailymotion quality attribute accepts the following values: 240, 380, 480, 720, 1080, 1440, 2160");
+            trigger_error(
+                "unknown attribute value;
+                oui_dailymotion quality attribute accepts the following values:
+                240, 380, 480, 720, 1080, 1440, 2160"
+            );
             return;
         }
     }
@@ -141,7 +153,11 @@ function oui_dailymotion($atts, $thing)
         if (in_array($startscreen, array('flash', 'html'))) {
             $qString[] = 'startscreen=' . $startscreen;
         } else {
-            trigger_error("unknown attribute value; oui_dailymotion startscreen attribute accepts the following values: flash, html");
+            trigger_error(
+                "unknown attribute value;
+                oui_dailymotion startscreen attribute accepts the following values:
+                flash, html"
+            );
             return;
         }
     }
@@ -155,7 +171,11 @@ function oui_dailymotion($atts, $thing)
     if (in_array($wmode, array('transparent', 'opaque'))) {
         $qString[] = 'wmode=' . $wmode;
     } else {
-        trigger_error("unknown attribute value; oui_dailymotion wmode attribute accepts the following values: transparent, opaque");
+        trigger_error(
+            "unknown attribute value;
+            oui_dailymotion wmode attribute accepts the following values:
+            transparent, opaque"
+        );
         return;
     }
 
@@ -206,7 +226,7 @@ function oui_if_dailymotion($atts, $thing)
 
     $result = $video ? _oui_dailymotion($video) : _oui_dailymotion($thisarticle[strtolower($custom)]);
 
-    return parse(EvalElse($thing, $result));
+    return defined('PREF_PLUGIN') ? parse($thing, $result) : parse(EvalElse($thing, $result));
 }
 
 
