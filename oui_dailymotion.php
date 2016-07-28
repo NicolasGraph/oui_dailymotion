@@ -82,20 +82,19 @@ function oui_dailymotion($atts, $thing)
 
     $qString = array();
 
-    foreach ($qAtts as $att => $values) {
-        if ($values) {
-            if (!is_array($values)) {
-                $qString[] = $att . '=' . $values;
+    foreach ($qAtts as $att => $value) {
+        if ($value) {
+            if (!is_array($value)) {
+                $qString[] = $att . '=' . $value;
             } else {
-                foreach ($values as $value => $valid) {
-                    if ($value) {
-                        if (in_list($value, $valid)) {
-                            $qString[] = $att . '=' . $value;
+                foreach ($value as $val => $valid) {
+                    if ($val) {
+                        if (in_list($val, $valid)) {
+                            $qString[] = $att . '=' . $val;
                         } else {
                             trigger_error(
-                                "unknown attribute value;
-                                oui_dailymotion " . $att . " attribute accepts the following values: "
-                                . $valid
+                                "unknown attribute value; oui_dailymotion " . $att .
+                                " attribute accepts the following values: " . $valid
                             );
                             return;
                         }
