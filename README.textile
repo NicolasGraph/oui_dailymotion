@@ -91,7 +91,7 @@ bc. <txp:oui_dailymotion custom="Dailymotion" />
 
 h3. Example 2: Set the size of the player
 
-bc. <txp:oui_dailymotion video="https://Dailymotion.com/86295452" width="500" ratio="16:9" />
+bc. <txp:oui_dailymotion video="http://dai.ly/x4l8awd" width="500" ratio="16:9" />
 
 h3. Example 3: Using the conditional tag
 
