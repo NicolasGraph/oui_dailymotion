@@ -1,118 +1,206 @@
 h1. oui_dailymotion
 
-Easily embed Dailymotion videos in articles and customise the appearance of the player.
+h2. Introduction
 
-"Download":https://github.com/NicolasGraph/oui_dailymotion/releases | "Donate":https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PREHX3MZMXEUN
+"oui_dailymotion":https://github.com/NicolasGraph/oui_dailymotion is a "oui_player":https://github.com/NicolasGraph/oui_player v2+ extension to easily embed "Dailymotion":https://dailymotion.com/ provided videos in "Textpattern":https://textpattern.com/ powered websites.
 
-h2. Table of contents
+The above platform serves cookies with its player, according to the EU legislation, you should warn your users about these cookies before they are added. This can be done by using "oui_cookie":https://github.com/NicolasGraph/oui_cookie.
 
-# "Plugin requirements":#help-section01
-# "Installation":#help-section02
-# "Tags":#help-section03
-# "Examples":#help-section04
-# "Author":#help-section05
-# "License":#help-section06
-
-h2(#help-section01). Plugin requirements
+h3. Plugin requirements
 
 oui_dailymotion's minimum requirements:
 
-* Textpattern 4.5+
+* "Textpattern CMS":http://textpattern.com/ v4.6+;
+* "oui_player":https://github.com/NicolasGraph/oui_player v2+;
+* "oui_player_provider":https://github.com/NicolasGraph/oui_player_provider v1+.
 
-h2(#help-section02). Installation
+h2. Plugin management
 
-To install go to the 'plugins' tab under 'admin' and paste the plugin code into the 'Install plugin' box, 'upload' and then 'install'. Please note that you will need to set-up a custom field to use for associating videos with articles, unless you choose to directly embed the new tag in the article text.
+h3. Installation
 
+h4. From the admin interface
 
-h2(#help-section03). Tags
+# "Download":https://github.com/NicolasGraph/oui_dailymotion/releases the compiled plugin file or the source to compile a customized file.
+# Paste the content of the compiled plugin file under the "Admin > Plugins":?event=plugin tab and click the _Upload_ button.
+# Confirm the plugin install by clicking the _Install_ button on the plugin preview page.
+# Enable the plugin and click the _Options_ link (or visit the _Preferences_ tab) to set the provider preferences.
 
-h3. oui_dailymotion
+h4. Via Composer
 
-Embeds a Dailymotion video in the page using an iframe.
+After "installing Composer":https://getcomposer.org/doc/00-intro.md…
 
-bc. <txp:oui_dailymotion />
+# Target your project directory:
+@$ cd /path/to/your/textpattern/installation/dir@
+# If it's not already done, lock your version of Txp:
+@$ composer require textpattern/lock:4.6.2@, where @4.6.2@ is the Txp version in use.
+# Install oui_dailymotion:
+@$ composer require oui/oui_dailymotion@
 
-h4. Video attributes
+h3. Update
 
-* _video_ - Dailymotion url or video ID for the video you want to embed
-* _custom_ - Name of the custom field containing video IDs/urls associated with article
-* _start_ - Start position (in seconds) of the video as an integer
-* _autoplay_ - '1' to autoplay the video, '0' to turn off autoplay (default)
+h4. From the admin interface
 
-h4. Basic attributes
+# Follow the installation instruction above.
 
-* _label_ - Label for the video
-* _labeltag_ - Independent wraptag for label
-* _wraptag_ - HTML tag to be used as the wraptag, without brackets
-* _class_ - CSS class attribute for wraptag
+h4. Via Composer
 
-h3. Customising the Dailymotion player
+bc. $ composer update oui/oui_dailymotion
 
-You can customise the appearance of the Dailymotion player using this plugin to define things like colours and size.
+h3. Uninstall
 
-* _width_ - Width of the video player.
-* _height_ - Height of the video player.
-* _ratio_ - Aspect ratio (defaults 4:3).
-* _api_ - Enables the Player API, see API below.
-* _autoplay_ - Starts the playback of the video automatically after the player load (defaults to 0).
-* _chromeless_ - Determines if the player should display controls or not during video playback (defaults to 0).
-* _highlight_ - HTML color of the controls elements' highlights (defaults to ffcc33). Overall skin colors will automatically be adjusted (dark or clear) based on this color element.
-* _html_ - Forces the HTML5 mode.
-* _id_ - Id of the player unique to the page to be passed back with all API messages
-* _info_ - Shows videos information (title/author) on the start screen (defaults to 1).
-* _logo_ - Allows to hide or show the Dailymotion logo (defaults to 1).
-* _network_ - Hints the player about the host network type. Allowed values are dsl and cellular. The player may use this value to select the correct default stream quality.
-* _origin_ - The domain of the page hosting the Dailymotion player. When using api=postMessage, you might want to specify origin for extra security.
-* _quality_ - Specifies the suggested quality for the video to be used by default (if available) when the playback starts. Valid values are 240, 380, 480, 720, 1080, 1440, 2160.
-* _related_ - Shows related videos at the end of the video. Default value is 1.
-* _start_ - Specifies when the video should start, value is in seconds. Default value is 0.
-* _startscreen_ - Forces the startscreen to use _flash_ or _html_ mode. By default, the html mode is used when UA can render it or flash otherwise.
-* _syndication_ - Passes your syndication key to the player, the value to set is your key.
-* _wmode_ - Sets the wmode value for the Flash player. Valid values are _transparent_ and _opaque_. If you ever need to display html elements above the player, you should use wmode=opaque. Default value is transparent.
+h4. From the admin interface
 
-h2. oui_if_dailymotion
+# Check the box on the left of the plugin row under the "Admin > Plugins":?event=plugin.
+# open the select list at the bottom of the plugins table and choose _Delete_.
+# confirm the plugin deletion.
 
-In addition to oui_dailymotion this plugin also comes with oui_if_dailymotion, a conditional tag for checking if the video URL is a Dailymotion one.
+h4. Via Composer
 
-bc. <txp:oui_if_dailymotion video="[URL]"></txp:oui_if_dailymotion>
+bc. $ composer remove oui/oui_dailymotion
 
-h4. Attributes
+h2. Tags and parameters
 
-Use one or the other of the following:
+h3. oui_dailymotion vs oui_player
 
-* _custom_ - Name of the custom field containing video IDs/urls associated with article
-* _video_ - A URL to check if it is a valid Dailymotion URL
+While the @<txp:oui_player />@ tag is able to embed any video from any extension-related provider, the @<txp:oui_dailymotion />@ tag is a shortcut to embed Dailymotion videos only. It is strictly equivalent to @<txp:oui_player provider="dailymotion" />@.
 
-h2(#help-section04). Examples
+Check the "oui_player":https://github.com/NicolasGraph/oui_player documentation for more informations.
 
-h3. Example 1: Use custom field to associate video with an article
+h4. Recognised values for the @play@ attribute
 
-bc. <txp:oui_dailymotion custom="Dailymotion" />
+* *ID*;
+* http(s)://dai.ly/[*ID*];
+* http(s)://www.dailymotion.com/video/[*ID*]…;
+* http(s)://www.dailymotion.com/embed/video/[*ID*];
+* *Name of a field* containing any of the above value.
 
-h3. Example 2: Set the size of the player
+When using the @<txp:oui_player />@ tag (vs @<oui_dailymotion />@), the right provider needs to be set if the @play@ value or its field related one is an ID. It is optional, but can fasten the rendering, if the value is an URL.
 
-bc. <txp:oui_dailymotion video="http://dai.ly/x4l8awd" width="500" ratio="16:9" />
+h4. Player customization
 
-h3. Example 3: Using the conditional tag
+h5. Preferences vs attributes
 
-bc.. <txp:oui_if_dailymotion video="https://Dailymotion.com/86295452">
-	Yes
-<txp:else />
-	No
+While some player customization elements, related to the media to play, should be used through attributes, these used as global settings should preferrably be set through the plugin preferences to avoid a massive use of tag attributes.
+
+Of course, it is still possible to override a preference value via an attribute when needed.
+
+h5. Size
+
+- @width@ :=
+Integer; initially set to @640@;
+The width of the player in pixels. =:
+- @height@ :=
+Integer; initially not set;
+The height of the player in pixels. =:
+- @ratio@ :=
+Integer[@:@]integer; initially set to @16:9@;
+The ratio used to calculate the missing value for the width or the height. =:
+- @responsive@ :=
+@true@ or @false@; initially set to @false@.
+Adapts the final player size from the provided width and/or height and/or ratio values to fit the container width.
+Wraps the player and adds some styles.
+The related preference is a generic oui_player preference; it is applied to all providers or none. =:
+
+h5. parameters (a→z)
+
+- @api@ :=
+@false@, @postMessage@, @location@ or @1@; initially set to @false@.
+Enables or disables "the javascript player api":https://developer.dailymotion.com/player#player-api. =:
+- @autoplay@ :=
+@true@ or @false@; initially set to @false@.
+Starts the playback of the video automatically after the player load.
+This parameter may not work on some mobile OS. =:
+- @controls@ :=
+@true@ or @false@; initially set to @true@.
+Whether to display the player controls or not. =:
+- @endscreen_enable@ :=
+@true@ or @false@; initially set to @true@.
+Whether to enable the end screen or not. =:
+- @mute@ :=
+@true@ or @false@; initially set to @false@.
+Whether to mute the video or not. =:
+- @origin@ :=
+URL; initially not set.
+The domain of the page hosting the Dailymotion player.
+When using @api="postMessage"@, you might want to specify origin for extra security. =:
+- @quality@ :=
+@240@, @380@, @480@, @720@, @1080@, @1440@ or @2160@; initially set to @auto@.
+Set the suggested playback quality for the video. =:
+- @sharing_enable@ :=
+@true@ or @false@; initially set to @true@.
+Whether to display the sharing button or not. =:
+- @start@ :=
+Integer, initially not set.
+Specifies the time (in seconds) from which the video should start playing. =:
+- @subtitles_default@ :=
+Initially not set.
+Specifies the default selected subtitles language. =:
+- @syndication@ :=
+Initially not set.
+Passes your syndication key to the player. =:
+- @ui_highlight@ :=
+Hexadecimal color value; initially set to @ffcc33@.
+Changes the default colour used in the controls. =:
+- @ui_logo@ :=
+@true@ or @false@; initially set to @true@.
+Whether to display the Dailymotion logo or not. =:
+- @ui_start_screen_info@ :=
+@true@ or @false@; initially set to @true@.
+Whether to show video information on the start screen or not. =:
+- @ui_theme@ :=
+@dark@ or @light@, initially set to @dark@.
+Choose the default base colour theme. =:
+
+h3. oui_if_dailymotion vs oui_if_player
+
+p. While the @<txp:oui_if_player>…</txp:oui_if_player>@ tag is able to check an URL against any URL from any extension-related provider, the @<txp:oui_if_dailymotion>…</txp:oui_if_dailymotion>@ tag is a shortcut to check an URL against Dailymotion related URL schemes only. It is strictly equivalent to @<txp:oui_if_player provider="dailymotion">…</txp:oui_if_player>@.
+
+Check the "oui_player":https://github.com/NicolasGraph/oui_player documentation for more informations.
+
+h2. Examples
+
+h3. Embed a player using the preference values
+
+bc(language-markup). <txp:oui_player />
+
+"oui_player":https://github.com/NicolasGraph/oui_player preference related field value: @http://dai.ly/x2m8jpp@.
+
+h3. Embed a player by defining its provider and a media ID through attributes
+
+bc(language-markup). <txp:oui_player provider="dailymotion" play="x2m8jpp" />
+
+…or:
+
+bc(language-markup). <txp:oui_dailymotion play="x2m8jpp" />
+
+h3. Conditionally embed a player using attributes
+
+bc(language-markup).. <txp:oui_if_player provider="dailymotion" play="https://www.dailymotion.com/video/x2m8jpp">
+    <txp:oui_player />
+</txp:oui_if_player>
+
+p. …or:
+
+bc(language-markup).. <txp:oui_if_dailymotion play="https://www.dailymotion.com/video/x2m8jpp">
+    <txp:oui_dailymotion />
 </txp:oui_if_dailymotion>
 
-h2(#help-section05). Author
+h2. Credits
 
-Made Dailymotion compatible by Nicolas Morand from "Andy Carter":http://andy-carter.com's plugins "arc_youtube":http://andy-carter.com/txp/arc_youtube and "arc_vimeo":http://andy-carter.com/txp/arc_vimeo.
+h3. Author
 
-h2(#help-section06). License
+"Nicolas Morand":https://twitter.com/NicolasGraph
+_Thank you to the Textpattern community and the core team._
 
-The MIT License (MIT)
+h3. License
 
-Copyright (c) 2014 Andy Carter, (c) 2015 Nicolas Morand
+This plugin is distributed under "GPL v2.0":https://www.gnu.org/licenses/gpl-2.0.txt.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+oui_dailymotion version 1.0.0, Copyright (C) 2018 Nicolas Morand
+This Textpattern plugin comes with ABSOLUTELY "NO WARRANTY":https://www.gnu.org/licenses/gpl-2.0.html#section11.
+This is free software, and you are welcome to redistribute it "under certain conditions":https://www.gnu.org/licenses/gpl-2.0.html#SEC3.
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+h3. Changelog
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+* *oui_dailymotion v1.0.0-beta* (2018-06-24)
+* *oui_player v1.3.0* (2017-05-24)
