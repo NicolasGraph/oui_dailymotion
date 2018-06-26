@@ -1,6 +1,6 @@
 {
-    "name": "oui/oui_dailymotion",
-    "description": "Dailymotion extension for oui_player",
+    "name": "nicolasgraph/oui_dailymotion",
+    "description": "Embed Dailymotion video players in Textpattern CMS through oui_player v2+",
     "keywords": [
         "textpattern",
         "plugin",
@@ -23,9 +23,10 @@
         "source": "https://github.com/NicolasGraph/oui_dailymotion"
     },
     "require": {
-        "textpattern/lock": "4.6.*",
+        "textpattern/lock": "^4.6",
         "textpattern/installer": "*",
-        "oui/oui_player": "2.*",
-        "oui/oui_player_provider": "1.*"
-    }
+        "nicolasgraph/oui_player": "^2",
+        "nicolasgraph/oui_player_provider": "^1"
+    },
+    "minimum-stability": "beta"
 }
