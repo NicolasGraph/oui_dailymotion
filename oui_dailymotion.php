@@ -43,6 +43,17 @@ namespace Oui\Player {
             );
             protected static $src = '//www.dailymotion.com/';
             protected static $glue = array('embed/video/', '?', '&amp;');
+            protected static $dims = array(
+                'width'     => array(
+                    'default' => '480',
+                ),
+                'height'    => array(
+                    'default' => '270',
+                ),
+                'ratio'     => array(
+                    'default' => '',
+                ),
+            );
             protected static $params = array(
                 'api'                  => array(
                     'default' => 'false',

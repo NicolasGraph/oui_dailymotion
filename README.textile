@@ -87,13 +87,13 @@ Of course, it is still possible to override a preference value via an attribute 
 h5. Size
 
 - @width@ :=
-Integer; initially set to @640@;
+Integer; initially set to @480@;
 The width of the player in pixels. =:
 - @height@ :=
-Integer; initially not set;
+Integer; initially set to @270@;
 The height of the player in pixels. =:
 - @ratio@ :=
-Integer[@:@]integer; initially set to @16:9@;
+Integer[@:@]integer; initially not set;
 The ratio used to calculate the missing value for the width or the height. =:
 - @responsive@ :=
 @true@ or @false@; initially set to @false@.
