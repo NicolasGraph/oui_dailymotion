@@ -26,7 +26,7 @@
         "textpattern/lock": "^4.6",
         "textpattern/installer": "*",
         "nicolasgraph/oui_player": "^2",
-        "nicolasgraph/oui_player_provider": "^1"
+        "nicolasgraph/oui_provider": "^1"
     },
     "minimum-stability": "beta"
 }

@@ -12,7 +12,7 @@ oui_dailymotion's minimum requirements:
 
 * "Textpattern CMS":http://textpattern.com/ v4.6+;
 * "oui_player":https://github.com/NicolasGraph/oui_player v2+;
-* "oui_player_provider":https://github.com/NicolasGraph/oui_player_provider v1+.
+* "oui_provider":https://github.com/NicolasGraph/oui_provider v1+.
 
 h2. Plugin management
 
