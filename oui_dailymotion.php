@@ -113,13 +113,3 @@ namespace Oui {
         }
     }
 }
-
-namespace {
-    function oui_dailymotion($atts) {
-        return oui_player(array_merge(array('provider' => 'dailymotion'), $atts));
-    }
-
-    function oui_if_dailymotion($atts, $thing) {
-        return oui_if_player(array_merge(array('provider' => 'dailymotion'), $atts), $thing);
-    }
-}
