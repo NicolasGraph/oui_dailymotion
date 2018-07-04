@@ -44,15 +44,9 @@ namespace Oui {
             protected static $src = '//www.dailymotion.com/';
             protected static $glue = array('embed/video/', '?', '&amp;');
             protected static $dims = array(
-                'width'     => array(
-                    'default' => '480',
-                ),
-                'height'    => array(
-                    'default' => '270',
-                ),
-                'ratio'     => array(
-                    'default' => '',
-                ),
+                'width'  => '480',
+                'height' => '270',
+                'ratio'  => '',
             );
             protected static $params = array(
                 'api'                  => array(
@@ -75,9 +69,7 @@ namespace Oui {
                     'default' => 'false',
                     'valid'   => array('true', 'false'),
                 ),
-                'origin'               => array(
-                    'default' => '',
-                ),
+                'origin'               => '',
                 'quality'              => array(
                     'default' => 'auto',
                     'valid'   => array('auto', '240', '380', '480', '720', '1080', '1440', '2160'),
