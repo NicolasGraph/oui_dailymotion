@@ -36,10 +36,8 @@ namespace Oui {
         class Dailymotion extends Provider
         {
             protected static $patterns = array(
-                'video' => array(
-                    'scheme' => '#^(http|https)://(www\.)?(dailymotion\.com/((embed/video)|(video))|(dai\.ly?))/([A-Za-z0-9]+)#i',
-                    'id'     => '8',
-                ),
+                'scheme' => '#^(http|https)://(www\.)?(dailymotion\.com/((embed/video)|(video))|(dai\.ly?))/([A-Za-z0-9]+)#i',
+                'id'     => '8',
             );
             protected static $src = '//www.dailymotion.com/';
             protected static $glue = array('embed/video/', '?', '&amp;');
