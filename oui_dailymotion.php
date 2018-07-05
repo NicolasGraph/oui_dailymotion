@@ -29,30 +29,22 @@
  * @package Oui\Player
  */
 
-namespace Oui\Player {
+namespace Oui {
 
-    if (class_exists('Oui\Player\Provider')) {
+    if (class_exists('Oui\Provider')) {
 
         class Dailymotion extends Provider
         {
             protected static $patterns = array(
-                'video' => array(
-                    'scheme' => '#^(http|https)://(www\.)?(dailymotion\.com/((embed/video)|(video))|(dai\.ly?))/([A-Za-z0-9]+)#i',
-                    'id'     => '8',
-                ),
+                'scheme' => '#^(http|https)://(www\.)?(dailymotion\.com/((embed/video)|(video))|(dai\.ly?))/([A-Za-z0-9]+)#i',
+                'id'     => '8',
             );
             protected static $src = '//www.dailymotion.com/';
             protected static $glue = array('embed/video/', '?', '&amp;');
             protected static $dims = array(
-                'width'     => array(
-                    'default' => '480',
-                ),
-                'height'    => array(
-                    'default' => '270',
-                ),
-                'ratio'     => array(
-                    'default' => '',
-                ),
+                'width'  => '480',
+                'height' => '270',
+                'ratio'  => '',
             );
             protected static $params = array(
                 'api'                  => array(
@@ -75,9 +67,7 @@ namespace Oui\Player {
                     'default' => 'false',
                     'valid'   => array('true', 'false'),
                 ),
-                'origin'               => array(
-                    'default' => '',
-                ),
+                'origin'               => '',
                 'quality'              => array(
                     'default' => 'auto',
                     'valid'   => array('auto', '240', '380', '480', '720', '1080', '1440', '2160'),
@@ -111,15 +101,5 @@ namespace Oui\Player {
                 ),
             );
         }
-    }
-}
-
-namespace {
-    function oui_dailymotion($atts) {
-        return oui_player(array_merge(array('provider' => 'dailymotion'), $atts));
-    }
-
-    function oui_if_dailymotion($atts, $thing) {
-        return oui_if_player(array_merge(array('provider' => 'dailymotion'), $atts), $thing);
     }
 }

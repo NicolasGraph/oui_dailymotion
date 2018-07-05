@@ -1,7 +1,7 @@
 {
     "name"        : "oui_dailymotion",
     "description" : "Embed Dailymotion video players through oui_player v2+",
-    "version"     : "2.0.0-BETA1",
+    "version"     : "2.0.0-BETA2",
     "type"        : 1,
     "author"      : "Nicolas Morand",
     "author_uri"  : "http://github.com/NicolasGraph",
