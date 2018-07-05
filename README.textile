@@ -103,6 +103,8 @@ The related preference is a generic oui_player preference; it is applied to all 
 
 h5. parameters (a→z)
 
+From Txp 4.7, paramaters accepting @true@ and @false@ as valid values can be enable through boolean/valueless attributes.
+
 - @api@ :=
 @false@, @postMessage@, @location@ or @1@; initially set to @false@.
 Enables or disables "the javascript player api":https://developer.dailymotion.com/player#player-api. =:
