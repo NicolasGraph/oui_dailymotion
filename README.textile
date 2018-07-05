@@ -204,6 +204,6 @@ This is free software, and you are welcome to redistribute it "under certain con
 
 h3. Changelog
 
-* *oui_dailymotion v2.0.0-BETA2* (2018-07-04)
+* *oui_dailymotion v2.0.0-BETA2* (2018-07-05)
 ** Changed: initial player size.
 * *oui_player v1.3.0* (2017-05-24)
