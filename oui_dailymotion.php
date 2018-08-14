@@ -29,77 +29,76 @@
  * @package Oui\Player
  */
 
-namespace Oui {
+namespace Oui;
 
-    if (class_exists('Oui\Provider')) {
+if (class_exists('Oui\Provider')) {
 
-        class Dailymotion extends Provider
-        {
-            protected static $patterns = array(
-                'scheme' => '#^(http|https)://(www\.)?(dailymotion\.com/((embed/video)|(video))|(dai\.ly?))/([A-Za-z0-9]+)#i',
-                'id'     => '8',
-            );
-            protected static $src = '//www.dailymotion.com/';
-            protected static $glue = array('embed/video/', '?', '&amp;');
-            protected static $dims = array(
-                'width'  => '480',
-                'height' => '270',
-                'ratio'  => '',
-            );
-            protected static $params = array(
-                'api'                  => array(
-                    'default' => 'false',
-                    'valid'   => array('false', 'postMessage', 'location', '1'),
-                ),
-                'autoplay'             => array(
-                    'default' => 'false',
-                    'valid'   => array('true', 'false'),
-                ),
-                'controls'             => array(
-                    'default' => 'true',
-                    'valid'   => array('true', 'false'),
-                ),
-                'endscreen-enable'     => array(
-                    'default' => 'true',
-                    'valid'   => array('true', 'false'),
-                ),
-                'mute'                 => array(
-                    'default' => 'false',
-                    'valid'   => array('true', 'false'),
-                ),
-                'origin'               => '',
-                'quality'              => array(
-                    'default' => 'auto',
-                    'valid'   => array('auto', '240', '380', '480', '720', '1080', '1440', '2160'),
-                ),
-                'sharing-enable'       => array(
-                    'default' => 'true',
-                    'valid'   => array('true', 'false'),
-                ),
-                'start'                => array(
-                    'default' => '0',
-                    'valid'   => 'number'
-                ),
-                'subtitles-default'    => array(
-                    'default' => '',
-                ),
-                'ui-highlight'         => array(
-                    'default' => '#ffcc33',
-                    'valid'   => 'color',
-                ),
-                'ui-logo'              => array(
-                    'default' => 'true',
-                    'valid'   => array('true', 'false'),
-                ),
-                'ui-theme'             => array(
-                    'default' => 'dark',
-                    'valid'   => array('dark', 'light'),
-                ),
-                'ui-start-screen-info' => array(
-                    'default' => 'true',
-                    'valid'   => array('true', 'false'),
-                ),
-            );
-        }
+    class Dailymotion extends Provider
+    {
+        protected static $srcBase = '//www.dailymotion.com/';
+        protected static $srcGlue = array('embed/video/', '?', '&amp;');
+        protected static $iniDims = array(
+            'width'  => '480',
+            'height' => '270',
+            'ratio'  => '',
+        );
+        protected static $iniParams = array(
+            'api'                  => array(
+                'default' => 'false',
+                'valid'   => array('false', 'postMessage', 'location', '1'),
+            ),
+            'autoplay'             => array(
+                'default' => 'false',
+                'valid'   => array('true', 'false'),
+            ),
+            'controls'             => array(
+                'default' => 'true',
+                'valid'   => array('true', 'false'),
+            ),
+            'endscreen-enable'     => array(
+                'default' => 'true',
+                'valid'   => array('true', 'false'),
+            ),
+            'mute'                 => array(
+                'default' => 'false',
+                'valid'   => array('true', 'false'),
+            ),
+            'origin'               => '',
+            'quality'              => array(
+                'default' => 'auto',
+                'valid'   => array('auto', '240', '380', '480', '720', '1080', '1440', '2160'),
+            ),
+            'sharing-enable'       => array(
+                'default' => 'true',
+                'valid'   => array('true', 'false'),
+            ),
+            'start'                => array(
+                'default' => '0',
+                'valid'   => 'number'
+            ),
+            'subtitles-default'    => array(
+                'default' => '',
+            ),
+            'ui-highlight'         => array(
+                'default' => '#ffcc33',
+                'valid'   => 'color',
+            ),
+            'ui-logo'              => array(
+                'default' => 'true',
+                'valid'   => array('true', 'false'),
+            ),
+            'ui-theme'             => array(
+                'default' => 'dark',
+                'valid'   => array('dark', 'light'),
+            ),
+            'ui-start-screen-info' => array(
+                'default' => 'true',
+                'valid'   => array('true', 'false'),
+            ),
+        );
+        protected static $mediaPatterns = array(
+            'scheme' => '#^https?://(www\.)?(dailymotion\.com/((embed/video)|(video))|(dai\.ly?))/([A-Za-z0-9]+)#i',
+            'id'     => '7',
+        );
     }
 }
