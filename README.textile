@@ -1,5 +1,11 @@
 h1. oui_dailymotion
 
+* "Introduction":#introduction
+* "Plugin management":#plugin-management
+* "Tags and parameters":#tags-and-parameters
+* "Examples":#examples
+* "Credits":#credits
+
 h2. Introduction
 
 "oui_dailymotion":https://github.com/NicolasGraph/oui_dailymotion is a "oui_player":https://github.com/NicolasGraph/oui_player v2+ extension to easily embed "Dailymotion":https://dailymotion.com/ provided videos in "Textpattern":https://textpattern.com/ powered websites.
