@@ -1,5 +1,11 @@
 h1. oui_dailymotion
 
+* "Introduction":#introduction
+* "Plugin management":#plugin-management
+* "Tags and parameters":#tags-and-parameters
+* "Examples":#examples
+* "Credits":#credits
+
 h2. Introduction
 
 "oui_dailymotion":https://github.com/NicolasGraph/oui_dailymotion is a "oui_player":https://github.com/NicolasGraph/oui_player v2+ extension to easily embed "Dailymotion":https://dailymotion.com/ provided videos in "Textpattern":https://textpattern.com/ powered websites.
@@ -71,8 +77,7 @@ h4. Recognised values for the @play@ attribute
 * *ID*;
 * http(s)://dai.ly/[*ID*];
 * http(s)://www.dailymotion.com/video/[*ID*]…;
-* http(s)://www.dailymotion.com/embed/video/[*ID*];
-* *Name of a field* containing any of the above value.
+* http(s)://www.dailymotion.com/embed/video/[*ID*].
 
 When using the @<txp:oui_player />@ tag (vs @<oui_dailymotion />@), the right provider needs to be set if the @play@ value or its field related one is an ID. It is optional, but can fasten the rendering, if the value is an URL.
 
@@ -98,10 +103,9 @@ The ratio used to calculate the missing value for the width or the height. =:
 - @responsive@ :=
 @true@ or @false@; initially set to @false@.
 Adapts the final player size from the provided width and/or height and/or ratio values to fit the container width.
-Wraps the player and adds some styles.
-The related preference is a generic oui_player preference; it is applied to all providers or none. =:
+Wraps the player and adds some styles. =:
 
-h5. parameters (a→z)
+h5. Parameters (a→z)
 
 From Txp 4.7, paramaters accepting @true@ and @false@ as valid values can be enable through boolean/valueless attributes.
 
@@ -198,12 +202,12 @@ h3. License
 
 This plugin is distributed under "GPL v2.0":https://www.gnu.org/licenses/gpl-2.0.txt.
 
-oui_dailymotion version 2.0.0-BETA2, Copyright (C) 2018 Nicolas Morand
+oui_dailymotion version 2.0.0-BETA3, Copyright (C) 2018 Nicolas Morand
 This Textpattern plugin comes with ABSOLUTELY "NO WARRANTY":https://www.gnu.org/licenses/gpl-2.0.html#section11.
 This is free software, and you are welcome to redistribute it "under certain conditions":https://www.gnu.org/licenses/gpl-2.0.html#SEC3.
 
 h3. Changelog
 
-* *oui_dailymotion v2.0.0-BETA2* (2018-07-05)
+* *oui_dailymotion v2.0.0-BETA3* (2018-08-15)
 ** Changed: initial player size.
 * *oui_player v1.3.0* (2017-05-24)

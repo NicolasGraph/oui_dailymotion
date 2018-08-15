@@ -6,6 +6,7 @@ oui_player_dailymotion_prefs => Afficher les préférences du lecteur Dailymotio
 oui_player_dailymotion_width => Largeur du lecteur
 oui_player_dailymotion_height => Hauteur du lecteur
 oui_player_dailymotion_ratio => Ratio utilisé en l'absence de l'une des dimensions
+oui_player_dailymotion_responsive => Rendre les lecteurs adaptatifs à partir des dimensions fournies
 oui_player_dailymotion_api => API JS du lecteur
 oui_player_dailymotion_api_false => Désactivée
 oui_player_dailymotion_api_postmessage => postMessage
