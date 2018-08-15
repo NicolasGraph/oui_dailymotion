@@ -103,8 +103,7 @@ The ratio used to calculate the missing value for the width or the height. =:
 - @responsive@ :=
 @true@ or @false@; initially set to @false@.
 Adapts the final player size from the provided width and/or height and/or ratio values to fit the container width.
-Wraps the player and adds some styles.
-The related preference is a generic oui_player preference; it is applied to all providers or none. =:
+Wraps the player and adds some styles. =:
 
 h5. Parameters (a→z)
 

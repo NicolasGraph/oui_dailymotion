@@ -38,9 +38,13 @@ if (class_exists('Oui\Provider')) {
         protected static $srcBase = '//www.dailymotion.com/';
         protected static $srcGlue = array('embed/video/', '?', '&amp;');
         protected static $iniDims = array(
-            'width'  => '480',
-            'height' => '270',
-            'ratio'  => '',
+            'width'      => '480',
+            'height'     => '270',
+            'ratio'      => '',
+            'responsive' => array(
+                'default' => 'false',
+                'valid'   => array('true', 'false'),
+            ),
         );
         protected static $iniParams = array(
             'api'                  => array(

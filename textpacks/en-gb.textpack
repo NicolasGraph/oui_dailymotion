@@ -35,3 +35,4 @@ oui_player_dailymotion_ui-theme_light => Light
 oui_player_dailymotion_width => Player width
 oui_player_dailymotion_height => Player height
 oui_player_dailymotion_ratio => Player ratio by default
+oui_player_dailymotion_responsive => Render responsive players from the provided dimensions
