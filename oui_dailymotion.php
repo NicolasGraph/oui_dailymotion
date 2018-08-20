@@ -31,9 +31,9 @@
 
 namespace Oui;
 
-if (class_exists('Oui\Provider')) {
+if (class_exists('Oui\Player\Provider')) {
 
-    class Dailymotion extends Provider
+    class Dailymotion extends Player\Provider
     {
         protected static $srcBase = '//www.dailymotion.com/';
         protected static $srcGlue = array('embed/video/', '?', '&amp;');
