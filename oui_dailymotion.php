@@ -33,8 +33,11 @@ namespace Oui;
 
 if (class_exists('Oui\Player\Provider')) {
 
-    class Dailymotion extends Player\Provider
+    class Dailymotion extends Player\Oembed
     {
+        protected static $endPoint = 'http://www.dailymotion.com/services/oembed?url=';
+        protected static $URLBase = 'https://www.dailymotion.com/video/';
+
         protected static $srcBase = '//www.dailymotion.com/';
         protected static $srcGlue = array('embed/video/', '?', '&amp;');
         protected static $iniDims = array(
